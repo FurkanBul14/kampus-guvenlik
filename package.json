@@ -1,0 +1,19 @@
+{
+  "name": "campus-safety-platform",
+  "version": "1.0.0",
+  "description": "Campus Safety & Environmental Monitoring Platform — BTU",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend && npm install --prefix mobile-simulator",
+    "dev": "concurrently --names \"BACKEND,FRONTEND\" --prefix-colors \"cyan,magenta\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "seed": "npm run seed --prefix backend",
+    "sim:normal":     "node mobile-simulator/simulator.js --scenario normal",
+    "sim:noise":      "node mobile-simulator/simulator.js --scenario noise_event",
+    "sim:movement":   "node mobile-simulator/simulator.js --scenario movement",
+    "sim:crowd":      "node mobile-simulator/simulator.js --scenario crowd",
+    "sim:restricted": "node mobile-simulator/simulator.js --scenario restricted_zone"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

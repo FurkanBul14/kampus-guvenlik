@@ -1,0 +1,18 @@
+{
+  "name": "campus-safety-simulator",
+  "version": "1.0.0",
+  "description": "Mobile phone sensor data simulator for Campus Safety Platform",
+  "main": "simulator.js",
+  "scripts": {
+    "start": "node simulator.js",
+    "normal": "node simulator.js --scenario normal",
+    "noise": "node simulator.js --scenario noise_event",
+    "crowd": "node simulator.js --scenario crowd",
+    "restricted": "node simulator.js --scenario restricted_zone",
+    "movement": "node simulator.js --scenario movement"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.5"
+  }
+}
