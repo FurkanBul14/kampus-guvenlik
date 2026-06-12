@@ -56,6 +56,13 @@ async function start() {
   process.env.MONGODB_URI = mongoUri;
 
   await connectDB();
+
+  if (process.env.FORCE_RESEED === 'true') {
+    const mongoose = require('mongoose');
+    await mongoose.connection.dropDatabase();
+    logger.warn('FORCE_RESEED=true — veritabanı sıfırlandı, yeniden seed yapılıyor');
+  }
+
   await runSeed();
 
   const server = http.createServer(app);
