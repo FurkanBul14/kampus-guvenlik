@@ -18,15 +18,21 @@ const swaggerSpec = require('./config/swagger');
 const app = express();
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
-const ALLOWED_ORIGINS = [process.env.CLIENT_URL || 'http://localhost:5173'];
+const ALLOWED_ORIGINS = [
+  process.env.CLIENT_URL || 'http://localhost:5173',
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
 
 app.use(cors({
   origin: (origin, callback) => {
     // Mobil istemciler origin göndermez → izin ver
     if (!origin) return callback(null, true);
-    // Dev modda Expo / localhost her porttan çalışabilir
+    // Dev modda her şeye izin ver
     if (IS_DEV) return callback(null, true);
-    // Production: sadece allowlist
+    // Vercel deployment URL'leri (*.vercel.app)
+    if (origin.endsWith('.vercel.app')) return callback(null, true);
+    // Production allowlist
     if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
     callback(new Error(`CORS: ${origin} engellendi`));
   },
